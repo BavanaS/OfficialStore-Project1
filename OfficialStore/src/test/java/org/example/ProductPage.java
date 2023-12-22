@@ -31,36 +31,5 @@ public class ProductPage
         Thread.sleep(7000);
         lastPage.click();
         Thread.sleep(3000);
-
-        List<WebElement> elements=driver.findElements(By.xpath("//div[@class='blu-product b-product-disabled product__card']"));
-
-        int x=0;
-        for(WebElement i:elements)
-        {
-            String str=i.getText();
-            if(!str.equals(""))
-            {
-                x++;
-            }
-        }
-        String[] outOfStock=new String[x];
-        x=0;
-        for(WebElement i:elements)
-        {
-            String str=i.getText();
-            if(!str.equals(""))
-            {
-                outOfStock[x]=str;
-                System.out.println(outOfStock[x]);
-                x++;
-                System.out.println("\n");
-            }
-        }
-
-        js.executeScript("window.scrollBy(0,300)","");
-        Thread.sleep(2000);
-        pages=driver.findElements(By.xpath("//a[@class='blu-paging__link']"));
-        WebElement firstPage=pages.get(0);
-        firstPage.click();
     }
 }
