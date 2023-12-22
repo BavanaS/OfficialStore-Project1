@@ -56,6 +56,6 @@ public class CheckSorting
             }
             assertEquals(price,sortingArray);
         }
-
+        driver.quit();
     }
 }
