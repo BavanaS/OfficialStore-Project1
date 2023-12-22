@@ -2,6 +2,7 @@ package org.example;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.sl.In;
 import org.openqa.selenium.*;
@@ -30,14 +31,32 @@ public class StepFile {
         StorePage.officialStore(driver,arg0);
         ProductPage.productPage(driver);
     }
-    public static void waitForEnableCondition(WebDriver driver, WebElement e) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.elementToBeClickable(e));
+
+    @Then("shows the out of stock product list")
+    public void showsTheOutOfStockProductList() throws InterruptedException {
+        OutOfStock.outOfStockList(driver);
     }
 
-    @And("Should apply brands {string} and {string}")
-    public void shouldApplyBrandsAnd(String arg0, String arg1)
+    @When("Should enter brands {string} and {string} and apply filters")
+    public void shouldEnterBrandsAndAndApplyFilters(String arg0, String arg1)throws InterruptedException {
+        BrandsPage.showBrands(driver,arg0,arg1);
+    }
+
+    @Then("show brand selected products")
+    public void showBrandSelectedProducts()
     {
-        Brands.brandFilter(driver,arg0,arg1);
+        BrandFilter.filter(driver);
+    }
+
+    @When("Should apply {string} filter")
+    public void shouldApplyFilter(String arg0) throws InterruptedException
+    {
+        ApplyCheapest.cheapestFilter(driver,arg0);
+    }
+
+    @Then("show the assertion result of last {int} pages")
+    public void showTheAssertionResultOfLastPages(int arg0) throws InterruptedException
+    {
+        CheckSorting.checkAssertion(driver,arg0);
     }
 }
